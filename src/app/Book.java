@@ -41,11 +41,5 @@ public class Book {
     public boolean equals(String name, String author, int year) {
         return (this.name.equals(name) && this.author.equals(author) && this.year == year);
     }
-
-
-
-
-
-
 }
 
