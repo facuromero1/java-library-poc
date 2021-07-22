@@ -6,6 +6,16 @@ public class Reserva {
     private User user;
 
 
+
+
+
+
+
+
+
+
+
+    
     public Reserva(Book book, User user) {
         this.book = book;
         this.user = user;
