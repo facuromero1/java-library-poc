@@ -42,5 +42,10 @@ public class Book {
         return (this.name.equals(name) && this.author.equals(author) && this.year == year);
     }
 
+
+
+
+
+
 }
 
