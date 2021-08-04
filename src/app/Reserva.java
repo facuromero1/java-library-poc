@@ -5,17 +5,6 @@ public class Reserva {
     private Book book;
     private User user;
 
-
-
-
-
-
-
-
-
-
-
-    
     public Reserva(Book book, User user) {
         this.book = book;
         this.user = user;
@@ -24,7 +13,7 @@ public class Reserva {
     public Book getBook() {
         return book;
     }
-    
+
     public void setBook(Book book) {
         this.book = book;
     }
@@ -39,5 +28,9 @@ public class Reserva {
 
     public String toString() {
         return "Reservation of: " + this.book + " for user: " + this.user;
+    }
+
+    public boolean equals(Book book, User user) {
+        return (this.book.equals(book) && this.user.equals(user));
     }
 }

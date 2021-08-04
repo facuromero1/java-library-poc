@@ -7,38 +7,32 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
         ArrayList<User> users = new ArrayList<>();
         ArrayList<Book> books = new ArrayList<>();
         ArrayList<Reserva> reservas = new ArrayList<>();
-
-
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion;
-
         while (!salir) {
             System.out.println("1. Create user");
             System.out.println("2. Add book");
             System.out.println("3. Make reservation");
             System.out.println("4. See reservation ");
             System.out.println("5. Exit ");
-
             System.out.println("Type number of your opcion");
             opcion = sn.nextInt();
 
             switch (opcion) {
+
                 case 1:
-                    User user = getUser(sn);
+                    User user = getNewUser(sn);
                     users.add(user);
                     break;
 
-
                 case 2:
-                    Book book = getBook(sn);
+                    Book book = getNewBook(sn);
                     books.add(book);
                     break;
-
 
                 case 3:
                     System.out.println("type name of user");
@@ -55,41 +49,49 @@ public class Main {
                     User usuarioEncontrado = userExists(userNameReservation, userLastnameReservation, users);
                     Book libroEncontrado = bookExists(nameBookReservation, nameAuthorBook, yearbook, books);
 
-                    if (usuarioEncontrado == null){
+                    if (usuarioEncontrado == null) {
                         System.out.println("User not found \n");
                         System.out.println("Do you wish to create a user? \n");
                         System.out.println("1- Yes \n");
                         System.out.println("2- No \n");
 
                         int option = sn.nextInt();
-                        if (option==1) {
-                            User newUser = getUser(sn);
+
+                        if (option == 1) {
+                            User newUser = getNewUser(sn);
                             users.add(newUser);
-                        }
-                        else {
-                            break;
                         }
                     }
 
-                    if (libroEncontrado == null){
+                    if (libroEncontrado == null) {
                         System.out.println("Book not found \n");
                         System.out.println("Do you wish to create a Book? \n");
                         System.out.println("1- Yes \n");
                         System.out.println("2- No \n");
 
                         int option = sn.nextInt();
-                        if (option==1) {
-                            Book newBook = getBook(sn);
+
+                        if (option == 1) {
+                            Book newBook = getNewBook(sn);
                             books.add(newBook);
-                        }
-                        else {
-                            break;
                         }
                     }
 
+                    if (libroEncontrado != null && usuarioEncontrado != null) {
+                        Reserva newReservation = new Reserva(libroEncontrado, usuarioEncontrado);
+                        reservas.add(newReservation);
+                        System.out.println("Your reservation has been create");
+                    }
+                    break;
 
                 case 4:
-                    System.out.println(reservas);
+                    System.out.println("type name of user");
+                    String userNameFound = sn.next();
+                    System.out.println("type lastname of user");
+                    String userLastnameFound = sn.next();
+                    ArrayList<Reserva> reservationFound = searchReservation(userNameFound, userLastnameFound, reservas);
+                    System.out.println(reservationFound);
+                    break;
 
                 case 5:
                     System.out.println("Good Bye");
@@ -99,7 +101,8 @@ public class Main {
         }
     }
 
-    private static User getUser(Scanner sn) {
+
+    private static User getNewUser(Scanner sn) {
         System.out.println("type name: ");
         String name = sn.next();
         System.out.println("type lastname: ");
@@ -107,16 +110,15 @@ public class Main {
         return new User(name, lastname);
     }
 
-    private static Book getBook(Scanner sn) {
+    private static Book getNewBook(Scanner sn) {
         System.out.println("enter name of book:");
-        String bookName = sn.nextLine();
+        String bookName = sn.next();
         System.out.println("enter name of author:");
-        String author = sn.nextLine();
+        String author = sn.next();
         System.out.println("enter book year:");
         int yearBook = sn.nextInt();
         return new Book(bookName, author, yearBook);
     }
-
 
     public static User userExists(String name, String lastname, ArrayList<User> users) {
         for (User user : users) {
@@ -126,14 +128,25 @@ public class Main {
         }
         return null;
     }
-    public static Book bookExists(String name,String author,int year,ArrayList<Book> books){
+
+    public static Book bookExists(String name, String author, int year, ArrayList<Book> books) {
         for (Book book : books) {
-            if (book.equals(name, author, year)){
+            if (book.equals(name, author, year)) {
                 return book;
             }
         }
         System.out.println("Book not found");
         return null;
+    }
+
+    public static ArrayList<Reserva> searchReservation(String name, String lastname, ArrayList<Reserva> reservas) {
+        ArrayList<Reserva> userReservation = new ArrayList<>();
+        for (Reserva reserva : reservas) {
+            if (reserva.getUser().getName().equals(name) && reserva.getUser().getLastname().equals(lastname)) {
+                userReservation.add(reserva);
+            }
+        }
+        return userReservation;
     }
 }
 
