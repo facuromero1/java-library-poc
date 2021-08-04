@@ -7,38 +7,32 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
         ArrayList<User> users = new ArrayList<>();
         ArrayList<Book> books = new ArrayList<>();
         ArrayList<Reserva> reservas = new ArrayList<>();
-
-
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion;
-
         while (!salir) {
             System.out.println("1. Create user");
             System.out.println("2. Add book");
             System.out.println("3. Make reservation");
             System.out.println("4. See reservation ");
             System.out.println("5. Exit ");
-
             System.out.println("Type number of your opcion");
             opcion = sn.nextInt();
 
             switch (opcion) {
+
                 case 1:
                     User user = getUser(sn);
                     users.add(user);
                     break;
 
-
                 case 2:
                     Book book = getBook(sn);
                     books.add(book);
                     break;
-
 
                 case 3:
                     System.out.println("type name of user");
@@ -62,6 +56,7 @@ public class Main {
                         System.out.println("2- No \n");
 
                         int option = sn.nextInt();
+
                         if (option == 1) {
                             User newUser = getUser(sn);
                             users.add(newUser);
@@ -75,6 +70,7 @@ public class Main {
                         System.out.println("2- No \n");
 
                         int option = sn.nextInt();
+
                         if (option == 1) {
                             Book newBook = getBook(sn);
                             books.add(newBook);
@@ -88,17 +84,14 @@ public class Main {
                     }
                     break;
 
-
                 case 4:
                     System.out.println("type name of user");
                     String userNameFound = sn.next();
                     System.out.println("type lastname of user");
                     String userLastnameFound = sn.next();
-
                     ArrayList<Reserva> reservationFound = searchReservation(userNameFound, userLastnameFound, reservas);
                     System.out.println(reservationFound);
                     break;
-
 
                 case 5:
                     System.out.println("Good Bye");
@@ -136,7 +129,6 @@ public class Main {
         return null;
     }
 
-
     public static Book bookExists(String name, String author, int year, ArrayList<Book> books) {
         for (Book book : books) {
             if (book.equals(name, author, year)) {
@@ -155,18 +147,6 @@ public class Main {
             }
         }
         return userReservation;
-
-    }
-
-
-    public static Reserva reservationExist(Book book, User user, ArrayList<Reserva> reservas) {
-        for (Reserva reserva : reservas) {
-            if (reserva.equals(book, user)) {
-                return reserva;
-            }
-        }
-        System.out.println("This user dont have reservations");
-        return null;
     }
 }
 
