@@ -1,4 +1,5 @@
 package app;
+
 import java.util.Scanner;
 
 
@@ -26,6 +27,10 @@ public class User {
     }
 
     public String getName() {
+        return name;
+    }
+
+    public String getFullName() {
         return name + lastname;
     }
 
@@ -33,7 +38,7 @@ public class User {
         return this.name + " " + this.lastname;//n
     }
 
-    public boolean equals(String name, String lastname){
+    public boolean equals(String name, String lastname) {
         return (this.name.equals(name) && this.lastname.equals(lastname));
     }
 
