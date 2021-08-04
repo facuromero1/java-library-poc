@@ -127,7 +127,6 @@ public class Main {
         return new Book(bookName, author, yearBook);
     }
 
-
     public static User userExists(String name, String lastname, ArrayList<User> users) {
         for (User user : users) {
             if (user.equals(name, lastname)) {
