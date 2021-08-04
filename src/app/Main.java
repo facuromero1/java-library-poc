@@ -25,12 +25,12 @@ public class Main {
             switch (opcion) {
 
                 case 1:
-                    User user = getUser(sn);
+                    User user = getNewUser(sn);
                     users.add(user);
                     break;
 
                 case 2:
-                    Book book = getBook(sn);
+                    Book book = getNewBook(sn);
                     books.add(book);
                     break;
 
@@ -58,7 +58,7 @@ public class Main {
                         int option = sn.nextInt();
 
                         if (option == 1) {
-                            User newUser = getUser(sn);
+                            User newUser = getNewUser(sn);
                             users.add(newUser);
                         }
                     }
@@ -72,7 +72,7 @@ public class Main {
                         int option = sn.nextInt();
 
                         if (option == 1) {
-                            Book newBook = getBook(sn);
+                            Book newBook = getNewBook(sn);
                             books.add(newBook);
                         }
                     }
@@ -102,7 +102,7 @@ public class Main {
     }
 
 
-    private static User getUser(Scanner sn) {
+    private static User getNewUser(Scanner sn) {
         System.out.println("type name: ");
         String name = sn.next();
         System.out.println("type lastname: ");
@@ -110,7 +110,7 @@ public class Main {
         return new User(name, lastname);
     }
 
-    private static Book getBook(Scanner sn) {
+    private static Book getNewBook(Scanner sn) {
         System.out.println("enter name of book:");
         String bookName = sn.next();
         System.out.println("enter name of author:");
