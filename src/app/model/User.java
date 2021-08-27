@@ -1,6 +1,4 @@
-package app;
-
-import java.util.Scanner;
+package app.model;
 
 
 public class User {

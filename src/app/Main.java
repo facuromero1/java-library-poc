@@ -1,5 +1,13 @@
 package app;
 
+import app.model.Book;
+import app.model.Reservation;
+import app.model.User;
+import app.repo.ReservationRepo;
+import app.service.BookService;
+import app.service.ReservationService;
+import app.service.UserService;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,80 +15,59 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<User> users = new ArrayList<>();
-        ArrayList<Book> books = new ArrayList<>();
-        ArrayList<Reserva> reservas = new ArrayList<>();
+        UserService userService = new UserService();
+        BookService bookService = new BookService();
+        ReservationService reservationService = new ReservationService();
+
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion;
         while (!salir) {
             System.out.println("1. Create user");
-            System.out.println("2. Add book");
-            System.out.println("3. Make reservation");
-            System.out.println("4. See reservation ");
-            System.out.println("5. Exit ");
+            System.out.println("2. Create book");
+            System.out.println("3. Create reservation");
+            System.out.println("4. See reservations ");
+            System.out.println("5. Found book");
+            System.out.println("6. Exit ");
             System.out.println("Type number of your opcion");
             opcion = sn.nextInt();
 
             switch (opcion) {
 
                 case 1:
-                    User user = getNewUser(sn);
-                    users.add(user);
+                    System.out.println("type name: ");
+                    String name = sn.next();
+                    System.out.println("type lastname: ");
+                    String lastname = sn.next();
+                    userService.createUser(name, lastname);
                     break;
 
                 case 2:
-                    Book book = getNewBook(sn);
-                    books.add(book);
+                    System.out.println("enter name of book:");
+                    String bookName = sn.next();
+                    System.out.println("enter name of author:");
+                    String author = sn.next();
+                    System.out.println("enter book year:");
+                    int yearBook = sn.nextInt();
+                    bookService.createBook(bookName, author, yearBook);
                     break;
-
                 case 3:
                     System.out.println("type name of user");
                     String userNameReservation = sn.next();
                     System.out.println("type lastname of user");
                     String userLastnameReservation = sn.next();
+                    boolean usuarioEncontrado = userService.userExists(userNameReservation, userLastnameReservation);
+
                     System.out.println("type name of book");
                     String nameBookReservation = sn.next();
                     System.out.println("type name of author");
-                    String nameAuthorBook = sn.next();
+                    String nameAuthorBookReservation = sn.next();
                     System.out.println("type year of book");
-                    int yearbook = sn.nextInt();
+                    int yearBookReservation = sn.nextInt();
+                    boolean libroEncontrado = bookService.bookExists(nameBookReservation, nameAuthorBookReservation, yearBookReservation);
 
-                    User usuarioEncontrado = userExists(userNameReservation, userLastnameReservation, users);
-                    Book libroEncontrado = bookExists(nameBookReservation, nameAuthorBook, yearbook, books);
-
-                    if (usuarioEncontrado == null) {
-                        System.out.println("User not found \n");
-                        System.out.println("Do you wish to create a user? \n");
-                        System.out.println("1- Yes \n");
-                        System.out.println("2- No \n");
-
-                        int option = sn.nextInt();
-
-                        if (option == 1) {
-                            User newUser = getNewUser(sn);
-                            users.add(newUser);
-                        }
-                    }
-
-                    if (libroEncontrado == null) {
-                        System.out.println("Book not found \n");
-                        System.out.println("Do you wish to create a Book? \n");
-                        System.out.println("1- Yes \n");
-                        System.out.println("2- No \n");
-
-                        int option = sn.nextInt();
-
-                        if (option == 1) {
-                            Book newBook = getNewBook(sn);
-                            books.add(newBook);
-                        }
-                    }
-
-                    if (libroEncontrado != null && usuarioEncontrado != null) {
-                        Reserva newReservation = new Reserva(libroEncontrado, usuarioEncontrado);
-                        reservas.add(newReservation);
-                        System.out.println("Your reservation has been create");
+                    if (usuarioEncontrado && !libroEncontrado) {
+                        reservationService.createReservation(userNameReservation, userLastnameReservation, nameBookReservation, nameAuthorBookReservation, yearBookReservation);
                     }
                     break;
 
@@ -89,11 +76,20 @@ public class Main {
                     String userNameFound = sn.next();
                     System.out.println("type lastname of user");
                     String userLastnameFound = sn.next();
-                    ArrayList<Reserva> reservationFound = searchReservation(userNameFound, userLastnameFound, reservas);
-                    System.out.println(reservationFound);
+                    reservationService.searchReservations(userNameFound, userLastnameFound);
                     break;
 
                 case 5:
+                    System.out.println("enter name of book:");
+                    String nameFoundBook = sn.next();
+                    System.out.println("enter name of author:");
+                    String authorFoundBook = sn.next();
+                    System.out.println("enter year of book");
+                    int yearFoundBook = sn.nextInt();
+                    bookService.bookExists(nameFoundBook, authorFoundBook, yearFoundBook);
+                    break;
+
+                case 6:
                     System.out.println("Good Bye");
                     salir = true;
 
@@ -101,53 +97,6 @@ public class Main {
         }
     }
 
-
-    private static User getNewUser(Scanner sn) {
-        System.out.println("type name: ");
-        String name = sn.next();
-        System.out.println("type lastname: ");
-        String lastname = sn.next();
-        return new User(name, lastname);
-    }
-
-    private static Book getNewBook(Scanner sn) {
-        System.out.println("enter name of book:");
-        String bookName = sn.next();
-        System.out.println("enter name of author:");
-        String author = sn.next();
-        System.out.println("enter book year:");
-        int yearBook = sn.nextInt();
-        return new Book(bookName, author, yearBook);
-    }
-
-    public static User userExists(String name, String lastname, ArrayList<User> users) {
-        for (User user : users) {
-            if (user.equals(name, lastname)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public static Book bookExists(String name, String author, int year, ArrayList<Book> books) {
-        for (Book book : books) {
-            if (book.equals(name, author, year)) {
-                return book;
-            }
-        }
-        System.out.println("Book not found");
-        return null;
-    }
-
-    public static ArrayList<Reserva> searchReservation(String name, String lastname, ArrayList<Reserva> reservas) {
-        ArrayList<Reserva> userReservation = new ArrayList<>();
-        for (Reserva reserva : reservas) {
-            if (reserva.getUser().getName().equals(name) && reserva.getUser().getLastname().equals(lastname)) {
-                userReservation.add(reserva);
-            }
-        }
-        return userReservation;
-    }
 }
 
 

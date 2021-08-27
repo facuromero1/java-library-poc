@@ -1,11 +1,14 @@
-package app;
+package app.model;
 
-public class Reserva {
+import app.model.Book;
+import app.model.User;
+
+public class Reservation {
 
     private Book book;
     private User user;
 
-    public Reserva(Book book, User user) {
+    public Reservation(Book book, User user) {
         this.book = book;
         this.user = user;
     }
