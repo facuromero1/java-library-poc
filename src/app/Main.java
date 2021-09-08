@@ -21,8 +21,6 @@ public class Main {
         BookService bookService = new BookService();
         ReservationService reservationService = new ReservationService();
 
-        bookService.createBook("principito","juans",1997);
-
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int option;
