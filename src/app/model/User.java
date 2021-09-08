@@ -3,7 +3,6 @@ package app.model;
 
 public class User {
 
-    private int id;
     private String name;
     private String lastname;
 
@@ -37,15 +36,8 @@ public class User {
         return this.name + " " + this.lastname;//n
     }
 
-    public boolean equals(Object obj) {
-        if (obj instanceof User){
-            User user = (User) obj;
-            return user.getName().equals(this.name) && user.getLastname().equals(this.lastname);
-        }
-        return false;
+    public boolean equals(String name, String lastname) {
+        return (this.name.equals(name) && this.lastname.equals(lastname));
     }
 
-    public boolean equals(String name, String lastname) {
-        return name.equals(this.name) && lastname.equals(this.lastname);
-    }
 }

@@ -4,7 +4,6 @@ import app.model.Book;
 import app.model.Reservation;
 import app.model.User;
 import app.repo.ReservationRepo;
-import app.repo.UserRepo;
 
 import java.util.ArrayList;
 
@@ -23,9 +22,12 @@ public class ReservationService {
         reservationRepo.addReservation(reservation);
     }
 
-    public ArrayList<Reservation> searchReservations(String name, String lastname) {
-        User user = new User (name,lastname);
-        return reservationRepo.getUserReservations(user);
+    public ArrayList searchReservations(String name, String lastname) {
+        ArrayList<Reservation> userReservation = new ArrayList<>();
+        Reservation reserva = reservationRepo.getReservation(name, lastname);
+        userReservation.add(reserva);
+
+        return userReservation;
     }
 }
 

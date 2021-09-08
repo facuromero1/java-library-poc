@@ -21,18 +21,16 @@ public class Reservation {
         this.book = book;
     }
 
-    public User getUser() {return user;}
+    public User getUser() {
+        return user;
+    }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    @Override
     public String toString() {
-        return "Reservation{" +
-                "book=" + book +
-                ", user=" + user +
-                '}';
+        return "Reservation of: " + this.book + " for user: " + this.user;
     }
 
     public boolean equals(Book book, User user) {

@@ -19,6 +19,11 @@ public class UserService {
         userRepo.addUser(user);
     }
 
+    public User getUser(String name, String lastname) {
+        User user = userRepo.getUser(name, lastname);
+        return user;
+    }
+
     public boolean userExists(String name, String lastname) {
         User user = userRepo.getUser(name, lastname);
         return user != null;
