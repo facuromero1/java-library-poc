@@ -1,7 +1,6 @@
 package app.model;
 
 public class Book {
-
     private String name;
     private String author;
     private int year;
@@ -11,6 +10,7 @@ public class Book {
         this.name = name;
         this.author = author;
         this.year = year;
+
 
     }
 
@@ -43,4 +43,3 @@ public class Book {
         return (this.name.equals(name) && this.author.equals(author) && this.year == year);
     }
 }
-

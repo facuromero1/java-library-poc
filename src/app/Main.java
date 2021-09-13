@@ -1,15 +1,11 @@
 package app;
 
 import app.model.Book;
-import app.model.Reservation;
-import app.model.User;
-import app.repo.ReservationRepo;
 import app.service.BookService;
 import app.service.ReservationService;
 import app.service.UserService;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 
 public class Main {
@@ -17,10 +13,11 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         UserService userService = new UserService();
         BookService bookService = new BookService();
-        ReservationService reservationService = new ReservationService();
+        ReservationService reservationService = new ReservationService(userService, bookService);
+
+        bookService.createBook("principito", "mila", 1997);
 
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
@@ -42,6 +39,7 @@ public class Main {
                     String name = sn.next();
                     System.out.println("type lastname: ");
                     String lastname = sn.next();
+
                     userService.createUser(name, lastname);
                     break;
 
@@ -52,42 +50,23 @@ public class Main {
                     String author = sn.next();
                     System.out.println("enter book year:");
                     int yearBook = sn.nextInt();
+
                     bookService.createBook(bookName, author, yearBook);
                     break;
+
                 case 3:
                     System.out.println("type name of user");
                     String userNameReservation = sn.next();
                     System.out.println("type lastname of user");
                     String userLastnameReservation = sn.next();
-                    boolean userFound = userService.userExists(userNameReservation, userLastnameReservation);
-
                     System.out.println("type name of book");
                     String nameBookReservation = sn.next();
                     System.out.println("type name of author");
                     String nameAuthorBookReservation = sn.next();
                     System.out.println("type year of book");
                     int yearBookReservation = sn.nextInt();
-                    boolean bookFound = bookService.bookExists(nameBookReservation, nameAuthorBookReservation, yearBookReservation);
 
-                    if (userFound && bookFound) {
-                        reservationService.createReservation(userNameReservation, userLastnameReservation, nameBookReservation, nameAuthorBookReservation, yearBookReservation);
-                        System.out.println("reservation has been created");
-                    } else {
-                        if (!userFound) {
-                            System.out.println("User not found");
-                            System.out.println("do you want to create it?");
-                            System.out.println("1 YES");
-                            System.out.println("2 NO");
-                            option = sn.nextInt();
-                            switch (option) {
-                                case 1:
-                                    userService.createUser(userNameReservation, userLastnameReservation);
-                                case 2:
-                                    continue;
-                            }
-                        }
-                    }
-
+                    System.out.println(reservationService.createReservation(userNameReservation, userLastnameReservation, nameBookReservation, nameAuthorBookReservation, yearBookReservation));
                     break;
 
                 case 4:
@@ -95,16 +74,8 @@ public class Main {
                     String userNameFound = sn.next();
                     System.out.println("type lastname of user");
                     String userLastnameFound = sn.next();
-                    boolean validationUserReservation = userService.userExists(userNameFound, userLastnameFound);
-                    if (validationUserReservation) {
-                        System.out.println(reservationService.searchReservations(userNameFound, userLastnameFound));
 
-                    }
-                    else {
-                        System.out.println("This user don't have reservations");
-                    }
-
-
+                    System.out.println(reservationService.searchReservations(userNameFound, userLastnameFound));
                     break;
 
                 case 5:
@@ -114,16 +85,12 @@ public class Main {
                     String authorFoundBook = sn.next();
                     System.out.println("enter year of book");
                     int yearFoundBook = sn.nextInt();
-                    Book book = bookService.foundBook(nameFoundBook, authorFoundBook, yearFoundBook);
-                    System.out.println(book);
-                    if (book == null){
-                        System.out.println("book not found");
 
-                    }
+                    System.out.println(bookService.findBook(nameFoundBook, authorFoundBook, yearFoundBook));
                     break;
 
                 case 6:
-                    System.out.println("Good Bye");
+                    System.out.println("good bye");
                     salir = true;
 
             }
@@ -131,13 +98,3 @@ public class Main {
     }
 
 }
-
-
-
-
-
-
-
-
-
-

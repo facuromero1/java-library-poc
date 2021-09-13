@@ -20,7 +20,7 @@ public class BookRepo {
 
     public Book getBook(String name, String author, int year) {
         for (Book book : books) {
-            if (book.equals(name, author, year)) {
+            if (book.equals(name,author,year)) {
                 return book;
             }
         }

@@ -24,8 +24,8 @@ public class BookService {
         return book != null;
     }
 
-    public Book foundBook(String name,String author,int year){
+    public boolean findBook(String name, String author, int year){
         Book book = bookRepo.getBook(name,author,year);
-        return book;
+        return book != null;
     }
 }

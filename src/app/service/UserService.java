@@ -23,6 +23,4 @@ public class UserService {
         User user = userRepo.getUser(name, lastname);
         return user != null;
     }
-
-
 }
