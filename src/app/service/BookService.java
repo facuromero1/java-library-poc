@@ -2,10 +2,6 @@ package app.service;
 
 import app.model.Book;
 import app.repo.BookRepo;
-import app.repo.UserRepo;
-
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 
 public class BookService {
     private BookRepo bookRepo;
@@ -19,13 +15,12 @@ public class BookService {
         bookRepo.addBook(book);
     }
 
-    public boolean bookExists(String name, String author, int year) {
+    public boolean findBook(String name, String author, int year) {
         Book book = bookRepo.getBook(name, author, year);
         return book != null;
     }
 
-    public boolean findBook(String name, String author, int year){
-        Book book = bookRepo.getBook(name,author,year);
-        return book != null;
+    public Book getBook(String name, String author, int year) {
+        return (bookRepo.getBook(name, author, year));
     }
 }

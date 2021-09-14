@@ -16,12 +16,10 @@ public class Main {
         UserService userService = new UserService();
         BookService bookService = new BookService();
         ReservationService reservationService = new ReservationService(userService, bookService);
-
-        bookService.createBook("principito", "mila", 1997);
-
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int option;
+
         while (!salir) {
             System.out.println("1. Create user");
             System.out.println("2. Create book");

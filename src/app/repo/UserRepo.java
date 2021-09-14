@@ -8,7 +8,6 @@ public class UserRepo {
 
     private ArrayList<User> users;
 
-
     public UserRepo() {
         this.users = new ArrayList<>();
     }

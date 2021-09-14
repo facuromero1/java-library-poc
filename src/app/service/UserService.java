@@ -3,9 +3,6 @@ package app.service;
 import app.model.User;
 import app.repo.UserRepo;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class UserService {
 
     private UserRepo userRepo;
@@ -19,8 +16,8 @@ public class UserService {
         userRepo.addUser(user);
     }
 
-    public boolean userExists(String name, String lastname) {
-        User user = userRepo.getUser(name, lastname);
-        return user != null;
+    public User getUser(String name, String lastname) {
+        return userRepo.getUser(name, lastname);
+
     }
 }

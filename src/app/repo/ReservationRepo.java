@@ -20,16 +20,6 @@ public class ReservationRepo {
 
     }
 
-    public Reservation getReservation(User user) {
-        for (Reservation reservation : reservations) {
-            if (reservation.getUser().equals(user)){
-                return reservation;
-            }
-        }
-
-        return null;
-    }
-
     public ArrayList<Reservation> getUserReservations(User user) {
         ArrayList<Reservation> result = new ArrayList<>();
         for (Reservation reservation : reservations) {
