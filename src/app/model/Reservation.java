@@ -1,11 +1,14 @@
-package app;
+package app.model;
 
-public class Reserva {
+import app.model.Book;
+import app.model.User;
+
+public class Reservation {
 
     private Book book;
     private User user;
 
-    public Reserva(Book book, User user) {
+    public Reservation(Book book, User user) {
         this.book = book;
         this.user = user;
     }
@@ -18,16 +21,18 @@ public class Reserva {
         this.book = book;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() {return user;}
 
     public void setUser(User user) {
         this.user = user;
     }
 
+    @Override
     public String toString() {
-        return "Reservation of: " + this.book + " for user: " + this.user;
+        return "Reservation{" +
+                "book=" + book +
+                ", user=" + user +
+                '}';
     }
 
     public boolean equals(Book book, User user) {
