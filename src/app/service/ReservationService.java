@@ -28,8 +28,9 @@ public class ReservationService {
         if (user != null && book != null) {
             Reservation reservation = new Reservation(book, user);
             reservationRepo.addReservation(reservation);
+            return "Your reservation has been create";
         }
-        return "Your reservation has been create";
+        return "User or book not found";
     }
 
     public ArrayList<Reservation> searchReservations(String name, String lastname) {

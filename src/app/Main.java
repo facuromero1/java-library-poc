@@ -63,8 +63,8 @@ public class Main {
                     String nameAuthorBookReservation = sn.next();
                     System.out.println("type year of book");
                     int yearBookReservation = sn.nextInt();
-
-                    System.out.println(reservationService.createReservation(userNameReservation, userLastnameReservation, nameBookReservation, nameAuthorBookReservation, yearBookReservation));
+                    String result = reservationService.createReservation(userNameReservation, userLastnameReservation, nameBookReservation, nameAuthorBookReservation, yearBookReservation);
+                    System.out.println(result);
                     break;
 
                 case 4:
