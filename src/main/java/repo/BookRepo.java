@@ -1,6 +1,6 @@
-package app.repo;
+package repo;
 
-import app.model.Book;
+import model.Book;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,9 @@ public class BookRepo {
         }
     }
 
-    public Book getBook(String name, String author, int year) {
+    public Book getBook(String name,int isbn) {
         for (Book book : books) {
-            if (book.equals(name, author, year)) {
+            if (book.equals(name) && book.getIsbn()== isbn) {
                 return book;
             }
         }

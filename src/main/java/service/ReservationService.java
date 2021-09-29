@@ -1,9 +1,9 @@
-package app.service;
+package service;
 
-import app.model.Book;
-import app.model.Reservation;
-import app.model.User;
-import app.repo.ReservationRepo;
+import model.Book;
+import model.Reservation;
+import model.User;
+import repo.ReservationRepo;
 
 
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ public class ReservationService {
 
     }
 
-    public String createReservation(String nameUser, String lastname, String nameBook, String author, int year) {
-        User user = userService.getUser(nameUser, lastname);
-        Book book = bookService.getBook(nameBook, author, year);
+    public String createReservation(int id, String nameBook,int isbn) {
+        User user = userService.getUser(id);
+        Book book = bookService.getBook(nameBook,isbn);
         if (user != null && book != null) {
             Reservation reservation = new Reservation(book, user);
             reservationRepo.addReservation(reservation);
@@ -33,10 +33,10 @@ public class ReservationService {
         return "User or book not found";
     }
 
-    public ArrayList<Reservation> searchReservations(String name, String lastname) {
-        User user = userService.getUser(name, lastname);
+    public ArrayList<Reservation> searchReservations(int id) {
+        User user = userService.getUser(id);
         if (user != null) {
-            return reservationRepo.getUserReservations(userService.getUser(name, lastname));
+            return reservationRepo.getUserReservations(userService.getUser(id));
         }
         return null;
     }

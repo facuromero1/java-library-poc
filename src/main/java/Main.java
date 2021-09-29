@@ -1,9 +1,6 @@
-package app;
-
-import app.model.Book;
-import app.service.BookService;
-import app.service.ReservationService;
-import app.service.UserService;
+import service.BookService;
+import service.ReservationService;
+import service.UserService;
 
 import java.util.Scanner;
 
@@ -19,6 +16,8 @@ public class Main {
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int option;
+        userService.createUser("facundo","romero",40405174);
+        bookService.createBook("naruto","facu",1997,1912415935);
 
         while (!salir) {
             System.out.println("1. Create user");
@@ -37,8 +36,10 @@ public class Main {
                     String name = sn.next();
                     System.out.println("type lastname: ");
                     String lastname = sn.next();
+                    System.out.println("type DNI");
+                    int id = sn.nextInt();
 
-                    userService.createUser(name, lastname);
+                    userService.createUser(name, lastname,id);
                     break;
 
                 case 2:
@@ -48,43 +49,39 @@ public class Main {
                     String author = sn.next();
                     System.out.println("enter book year:");
                     int yearBook = sn.nextInt();
+                    System.out.println("enter isbn number:");
+                    int isbnBook = sn.nextInt();
 
-                    bookService.createBook(bookName, author, yearBook);
+
+                    bookService.createBook(bookName, author, yearBook,isbnBook);
                     break;
 
                 case 3:
-                    System.out.println("type name of user");
-                    String userNameReservation = sn.next();
-                    System.out.println("type lastname of user");
-                    String userLastnameReservation = sn.next();
+                    System.out.println("type dni of user");
+                    int userId = sn.nextInt();
                     System.out.println("type name of book");
                     String nameBookReservation = sn.next();
-                    System.out.println("type name of author");
-                    String nameAuthorBookReservation = sn.next();
-                    System.out.println("type year of book");
-                    int yearBookReservation = sn.nextInt();
-                    String result = reservationService.createReservation(userNameReservation, userLastnameReservation, nameBookReservation, nameAuthorBookReservation, yearBookReservation);
+                    System.out.println("type isbn of book");
+                    int isbnBookReservation = sn.nextInt();
+
+                    String result = reservationService.createReservation(userId,nameBookReservation,isbnBookReservation);
                     System.out.println(result);
                     break;
 
                 case 4:
-                    System.out.println("type name of user");
-                    String userNameFound = sn.next();
-                    System.out.println("type lastname of user");
-                    String userLastnameFound = sn.next();
+                    System.out.println("type dni of user");
+                    int userIdFound = sn.nextInt();
 
-                    System.out.println(reservationService.searchReservations(userNameFound, userLastnameFound));
+                    System.out.println(reservationService.searchReservations(userIdFound));
                     break;
 
                 case 5:
                     System.out.println("enter name of book:");
                     String nameFoundBook = sn.next();
-                    System.out.println("enter name of author:");
-                    String authorFoundBook = sn.next();
-                    System.out.println("enter year of book");
-                    int yearFoundBook = sn.nextInt();
+                    System.out.println("enter isbn of book:");
+                    int isbnFoundBook = sn.nextInt();
 
-                    System.out.println(bookService.findBook(nameFoundBook, authorFoundBook, yearFoundBook));
+                    System.out.println(bookService.findBook(nameFoundBook,isbnFoundBook));
                     break;
 
                 case 6:

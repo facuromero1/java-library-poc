@@ -1,7 +1,7 @@
-package app.repo;
+package repo;
 
-import app.model.Reservation;
-import app.model.User;
+import model.Reservation;
+import model.User;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
-package app.repo;
+package repo;
 
-import app.model.User;
+import model.User;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,9 @@ public class UserRepo {
         }
     }
 
-    public User getUser(String name, String lastname) {
+    public User getUser(int id) {
         for (User user : users) {
-            if (user.equals(name, lastname)) {
+            if (user.getId() == (id)) {
                 return user;
             }
         }
