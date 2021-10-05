@@ -22,10 +22,11 @@ public class ReservationService {
 
     }
 
-    public String createReservation(int id, String nameBook,int isbn) {
-        User user = userService.getUser(id);
-        Book book = bookService.getBook(nameBook,isbn);
-        if (user != null && book != null) {
+    public String createReservation(int userId, String nameBook,String author,int isbn) {
+        User user = userService.getUser(userId);
+        Book book = bookService.getBookReservation(nameBook,author,isbn);
+
+        if (user != null && book != null  && reservationRepo.checkBookReservation(book)) {
             Reservation reservation = new Reservation(book, user);
             reservationRepo.addReservation(reservation);
             return "Your reservation has been create";
@@ -36,7 +37,7 @@ public class ReservationService {
     public ArrayList<Reservation> searchReservations(int id) {
         User user = userService.getUser(id);
         if (user != null) {
-            return reservationRepo.getUserReservations(userService.getUser(id));
+            return reservationRepo.getUserReservations(user);
         }
         return null;
     }

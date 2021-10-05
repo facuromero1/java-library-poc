@@ -42,11 +42,7 @@ public class Book {
 
 
 
-    public String toString() {
-        return this.name;
+    public String toString() {return "nombre:" + this.name + " " + "author:" + this.author + " " + "isbn:" + this.isbn;
     }
 
-    public boolean equals(String name) {
-        return (this.name.equals(name));
-    }
 }

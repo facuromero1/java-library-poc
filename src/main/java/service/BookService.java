@@ -3,6 +3,8 @@ package service;
 import model.Book;
 import repo.BookRepo;
 
+import java.util.ArrayList;
+
 public class BookService {
     private BookRepo bookRepo;
 
@@ -15,13 +17,22 @@ public class BookService {
         bookRepo.addBook(book);
     }
 
-    public boolean findBook(String name,int isbn) {
-        Book book = bookRepo.getBook(name,isbn);
-        return book != null;
+    public ArrayList<Book> findBooks(String name, String author) {
+        Book book = bookRepo.getBook(name, author);
+        if (book != null){
+            return bookRepo.findBooks(book);
+        }
+        return null;
     }
 
-    public Book getBook(String name,int isbn) {
 
-        return (bookRepo.getBook(name,isbn));
+
+    public Book getBook(String name, String author) {
+        return (bookRepo.getBook(name,author));
+    }
+
+    public Book getBookReservation(String name,String author,int isbn) {
+        return bookRepo.getBookReservation(name, author,isbn);
+
     }
 }

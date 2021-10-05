@@ -16,15 +16,13 @@ public class Main {
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int option;
-        userService.createUser("facundo","romero",40405174);
-        bookService.createBook("naruto","facu",1997,1912415935);
 
         while (!salir) {
             System.out.println("1. Create user");
             System.out.println("2. Create book");
             System.out.println("3. Create reservation");
             System.out.println("4. See reservations ");
-            System.out.println("5. Find book");
+            System.out.println("5. Find books");
             System.out.println("6. Exit ");
             System.out.println("Type number of your option");
             option = sn.nextInt();
@@ -61,10 +59,13 @@ public class Main {
                     int userId = sn.nextInt();
                     System.out.println("type name of book");
                     String nameBookReservation = sn.next();
+                    System.out.println("type author of book");
+                    String authorBookReservation = sn.next();
                     System.out.println("type isbn of book");
-                    int isbnBookReservation = sn.nextInt();
+                    int bookIsbnReservation = sn.nextInt();
 
-                    String result = reservationService.createReservation(userId,nameBookReservation,isbnBookReservation);
+
+                    String result = reservationService.createReservation(userId,nameBookReservation,authorBookReservation,bookIsbnReservation);
                     System.out.println(result);
                     break;
 
@@ -78,10 +79,11 @@ public class Main {
                 case 5:
                     System.out.println("enter name of book:");
                     String nameFoundBook = sn.next();
-                    System.out.println("enter isbn of book:");
-                    int isbnFoundBook = sn.nextInt();
+                    System.out.println("enter name of author");
+                    String authorFoundBook = sn.next();
 
-                    System.out.println(bookService.findBook(nameFoundBook,isbnFoundBook));
+
+                    System.out.println(bookService.findBooks(nameFoundBook,authorFoundBook));
                     break;
 
                 case 6:
