@@ -50,22 +50,17 @@ public class Main {
                     System.out.println("enter isbn number:");
                     int isbnBook = sn.nextInt();
 
-
                     bookService.createBook(bookName, author, yearBook,isbnBook);
                     break;
 
                 case 3:
                     System.out.println("type dni of user");
                     int userId = sn.nextInt();
-                    System.out.println("type name of book");
-                    String nameBookReservation = sn.next();
-                    System.out.println("type author of book");
-                    String authorBookReservation = sn.next();
                     System.out.println("type isbn of book");
                     int bookIsbnReservation = sn.nextInt();
 
 
-                    String result = reservationService.createReservation(userId,nameBookReservation,authorBookReservation,bookIsbnReservation);
+                    String result = reservationService.createReservation(userId,bookIsbnReservation);
                     System.out.println(result);
                     break;
 
@@ -78,12 +73,11 @@ public class Main {
 
                 case 5:
                     System.out.println("enter name of book:");
-                    String nameFoundBook = sn.next();
-                    System.out.println("enter name of author");
-                    String authorFoundBook = sn.next();
+                    String nameBook = sn.next();
+                    System.out.println("enter author of book:");
+                    String authorBook = sn.next();
 
-
-                    System.out.println(bookService.findBooks(nameFoundBook,authorFoundBook));
+                    System.out.println(bookService.findBooks(nameBook,authorBook));
                     break;
 
                 case 6:

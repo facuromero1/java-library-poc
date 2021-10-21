@@ -22,11 +22,11 @@ public class ReservationService {
 
     }
 
-    public String createReservation(int userId, String nameBook,String author,int isbn) {
+    public String createReservation(int userId,int isbn) {
         User user = userService.getUser(userId);
-        Book book = bookService.getBookReservation(nameBook,author,isbn);
+        Book book = bookService.getBook(isbn);
 
-        if (user != null && book != null  && reservationRepo.checkBookReservation(book)) {
+        if (user != null && book != null  && reservationRepo.reservationExist(book)) {
             Reservation reservation = new Reservation(book, user);
             reservationRepo.addReservation(reservation);
             return "Your reservation has been create";

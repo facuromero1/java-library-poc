@@ -17,22 +17,14 @@ public class BookService {
         bookRepo.addBook(book);
     }
 
-    public ArrayList<Book> findBooks(String name, String author) {
-        Book book = bookRepo.getBook(name, author);
-        if (book != null){
-            return bookRepo.findBooks(book);
+    public ArrayList<Book> findBooks(String nameBook,String author) {
+        return bookRepo.findBooks(nameBook,author);
         }
-        return null;
+
+
+    public Book getBook(int isbn) {
+        return bookRepo.getBook(isbn);
     }
 
 
-
-    public Book getBook(String name, String author) {
-        return (bookRepo.getBook(name,author));
-    }
-
-    public Book getBookReservation(String name,String author,int isbn) {
-        return bookRepo.getBookReservation(name, author,isbn);
-
-    }
 }
