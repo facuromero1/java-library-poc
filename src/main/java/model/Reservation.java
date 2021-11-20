@@ -1,7 +1,4 @@
-package app.model;
-
-import app.model.Book;
-import app.model.User;
+package model;
 
 public class Reservation {
 
